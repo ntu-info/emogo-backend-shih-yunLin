@@ -11,8 +11,9 @@ import shutil
 import zipfile
 from io import BytesIO
 
-load_dotenv()
-MONGODB_URI = os.getenv("DATABASE_URL")
+# load_dotenv()
+# MONGODB_URI = os.getenv("DATABASE_URL")
+MONGODB_URI = "mongodb+srv://shihyun_Lin:s1234567s@myproject.t4bzjvs.mongodb.net/?appName=MyProject"
 DB_NAME = "emogo"
 
 app = FastAPI()
