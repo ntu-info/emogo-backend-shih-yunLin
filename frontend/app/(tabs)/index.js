@@ -223,16 +223,22 @@ export default function HomeScreen() {
             headers: { 'Content-Type': 'multipart/form-data' },
           });
 
-          if (response.ok) {
-            const backendResult = await response.json();
-            console.log('✅ ✅ ✅ Backend 上傳成功！', backendResult);
 
-            // 健康檢查
-            const healthCheck = await fetch(`${API_URL}/`);
-            const healthData = await healthCheck.json();
-            console.log('✅ 後端健康檢查:', healthData);
+          console.log(`📊 Backend 回應狀態: ${response.status}`);
+
+          if (response.ok) {
+            // 先讀取為文字，再嘗試解析 JSON
+            const responseText = await response.text();
+            try {
+              const backendResult = JSON.parse(responseText);
+              console.log('✅ ✅ ✅ Backend 上傳成功！', backendResult);
+            } catch (jsonError) {
+              console.error('❌ JSON 解析失敗，後端返回:', responseText.substring(0, 300));
+            }
           } else {
+            const errorText = await response.text();
             console.log('❌ Backend 回應錯誤:', response.status);
+            console.log('錯誤內容:', errorText.substring(0, 300));
           }
         } catch (uploadError) {
           console.error('❌ Backend 上傳失敗:', uploadError.message);
