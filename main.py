@@ -48,6 +48,51 @@ async def shutdown_db_client():
 async def root():
     return {"message": "server ok"}
 
+# CSV Download Endpoints (must be before /download/{filename})
+@app.get("/download/sentiments-csv")
+async def download_sentiments_csv():
+    """Download all sentiments data as CSV"""
+    sentiments = await app.mongodb["sentiments"].find().to_list(None)
+    
+    # Create CSV content
+    csv_content = "mood_score,timestamp,created_at\n"
+    for sentiment in sentiments:
+        mood_score = sentiment.get("mood_score", "")
+        timestamp = sentiment.get("timestamp", "")
+        created_at = sentiment.get("created_at", "")
+        csv_content += f"{mood_score},{timestamp},{created_at}\n"
+    
+    return Response(
+        content=csv_content,
+        media_type="text/csv",
+        headers={
+            "Content-Disposition": "attachment; filename=emogo_sentiments.csv"
+        }
+    )
+
+@app.get("/download/gps-csv")
+async def download_gps_csv():
+    """Download all GPS data as CSV"""
+    gps_records = await app.mongodb["gps"].find().to_list(None)
+    
+    # Create CSV content
+    csv_content = "latitude,longitude,location_accuracy,timestamp,created_at\n"
+    for record in gps_records:
+        latitude = record.get("latitude", "")
+        longitude = record.get("longitude", "")
+        accuracy = record.get("location_accuracy", "")
+        timestamp = record.get("timestamp", "")
+        created_at = record.get("created_at", "")
+        csv_content += f"{latitude},{longitude},{accuracy},{timestamp},{created_at}\n"
+    
+    return Response(
+        content=csv_content,
+        media_type="text/csv",
+        headers={
+            "Content-Disposition": "attachment; filename=emogo_gps.csv"
+        }
+    )
+
 @app.get("/download/{filename}")
 async def download_file(filename: str):
     """Force download of video file"""
@@ -285,7 +330,10 @@ async def export_sentiments():
     <body>
         <h1>Sentiments Data Export</h1>
         <p>Total Records: {len(sentiments)}</p>
-        <a href="/export" style="display: inline-block; padding: 8px 15px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 5px; margin-bottom: 20px;">← Back to Export Page</a>
+        <div style="margin-bottom: 20px;">
+            <a href="/export" style="display: inline-block; padding: 8px 15px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 5px; margin-right: 10px;">← Back to Export Page</a>
+            <a href="/download/sentiments-csv" style="display: inline-block; padding: 8px 15px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px;">📥 Download as CSV</a>
+        </div>
         <table>
             <thead>
                 <tr>
@@ -342,7 +390,10 @@ async def export_gps():
     <body>
         <h1>GPS Data Export</h1>
         <p>Total Records: {len(gps_data)}</p>
-        <a href="/export" style="display: inline-block; padding: 8px 15px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 5px; margin-bottom: 20px;">← Back to Export Page</a>
+        <div style="margin-bottom: 20px;">
+            <a href="/export" style="display: inline-block; padding: 8px 15px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 5px; margin-right: 10px;">← Back to Export Page</a>
+            <a href="/download/gps-csv" style="display: inline-block; padding: 8px 15px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px;">📥 Download as CSV</a>
+        </div>
         <table>
             <thead>
                 <tr>

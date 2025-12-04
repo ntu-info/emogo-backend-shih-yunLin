@@ -167,6 +167,8 @@ export default function HomeScreen() {
     saveRecord(selectedVideoUri, score);
   };
 
+  const API_URL = "https://emogo-backend-shih-yunlin.onrender.com";
+
   const saveRecord = async (uri, score) => {
     console.log('📝 Starting saveRecord...', { uri, score });
     setIsProcessing(true);
@@ -174,6 +176,14 @@ export default function HomeScreen() {
       console.log('📍 Getting location...');
       const location = await getCurrentLocation();
       console.log('📍 Location received:', location?.coords);
+
+      const moodData = {
+        moodScore: score,
+        videoPath: uri,
+        latitude: location?.coords?.latitude || null,
+        longitude: location?.coords?.longitude || null,
+        locationAccuracy: location?.coords?.accuracy || null
+      };
 
       console.log('💾 Inserting mood record...');
       const result = insertMoodRecord({
@@ -189,6 +199,44 @@ export default function HomeScreen() {
         console.log('🎥 Updating video path for record ID:', result.id);
         await updateVideoPath(result.id, uri);
         console.log('✅ Record saved successfully!');
+
+        // 上傳到 Backend
+        console.log('🚀 開始上傳到 Backend...');
+        try {
+          const formData = new FormData();
+          formData.append('mood_score', score.toString());
+          if (moodData.latitude) formData.append('latitude', moodData.latitude.toString());
+          if (moodData.longitude) formData.append('longitude', moodData.longitude.toString());
+          if (moodData.locationAccuracy) formData.append('location_accuracy', moodData.locationAccuracy.toString());
+
+          const filename = uri.split('/').pop();
+          formData.append('video', {
+            uri: uri,
+            name: filename,
+            type: 'video/mp4',
+          });
+
+          console.log(`📡 正在上傳到: ${API_URL}/api/moods`);
+          const response = await fetch(`${API_URL}/api/moods`, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Content-Type': 'multipart/form-data' },
+          });
+
+          if (response.ok) {
+            const backendResult = await response.json();
+            console.log('✅ ✅ ✅ Backend 上傳成功！', backendResult);
+
+            // 健康檢查
+            const healthCheck = await fetch(`${API_URL}/`);
+            const healthData = await healthCheck.json();
+            console.log('✅ 後端健康檢查:', healthData);
+          } else {
+            console.log('❌ Backend 回應錯誤:', response.status);
+          }
+        } catch (uploadError) {
+          console.error('❌ Backend 上傳失敗:', uploadError.message);
+        }
 
         Alert.alert("記錄成功", "你的心情已儲存！");
         handleCloseRecord();

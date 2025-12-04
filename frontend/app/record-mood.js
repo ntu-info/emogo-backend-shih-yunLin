@@ -159,6 +159,13 @@ export default function RecordMoodScreen() {
 
             const result = await response.json();
             console.log('✅ ✅ ✅ Backend 上傳成功！', result);
+
+            // 自動測試：檢查後端健康狀態
+            console.log('🔍 自動測試後端連接...');
+            const healthCheck = await fetch(`${API_URL}/`);
+            const healthData = await healthCheck.json();
+            console.log('✅ 後端健康檢查:', healthData);  // 應該顯示 { message: 'server ok' }
+
             return result;
         } catch (error) {
             console.error('❌ ❌ ❌ Backend 上傳失敗:', error.message);
