@@ -1,29 +1,54 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/e7FBMwSa)
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=21880023&assignment_repo_type=AssignmentRepo)
-# Deploy FastAPI on Render
 
-Use this repo as a template to deploy a Python [FastAPI](https://fastapi.tiangolo.com) service on Render.
+# EmoGo Backend
 
-See https://render.com/docs/deploy-fastapi or follow the steps below:
+A FastAPI + MongoDB backend for the EmoGo mood tracking application.
 
-## Manual Steps
+## 🌐 Deployed URL
 
-1. You may use this repository directly or [create your own repository from this template](https://github.com/render-examples/fastapi/generate) if you'd like to customize the code.
-2. Create a new Web Service on Render.
-3. Specify the URL to your new repository or this repository.
-4. Render will automatically detect that you are deploying a Python service and use `pip` to download the dependencies.
-5. Specify the following as the Start Command.
+**Data Export Page:** https://emogo-backend-shih-yunlin.onrender.com/export
 
-    ```shell
-    uvicorn main:app --host 0.0.0.0 --port $PORT
-    ```
+TAs and users can access the following pages to view/download collected data:
+- [Vlog Export](https://emogo-backend-shih-yunlin.onrender.com/export/vlog) - View and download mood videos
+- [Sentiments Export](https://emogo-backend-shih-yunlin.onrender.com/export/sentiments) - View mood score data
+- [GPS Export](https://emogo-backend-shih-yunlin.onrender.com/export/gps) - View GPS coordinates data
 
-6. Click Create Web Service.
+## 📡 API Endpoints
 
-Or simply click:
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/` | GET | Health check |
+| `/api/moods` | POST | Upload mood record (video, mood_score, GPS) |
+| `/export` | GET | HTML export index page |
+| `/export/vlog` | GET | HTML page with video preview and download |
+| `/export/sentiments` | GET | HTML table of mood scores |
+| `/export/gps` | GET | HTML table of GPS data |
+| `/download/{filename}` | GET | Force download a video file |
+| `/download-all` | GET | Download all videos as ZIP |
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/render-examples/fastapi)
+## 🛠 Tech Stack
 
-## Thanks
+- **Framework:** FastAPI
+- **Database:** MongoDB Atlas
+- **Deployment:** Render
 
-Thanks to [Harish](https://harishgarg.com) for the [inspiration to create a FastAPI quickstart for Render](https://twitter.com/harishkgarg/status/1435084018677010434) and for some sample code!
+## 🚀 Local Development
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run server
+uvicorn main:app --reload
+```
+
+## 📁 Project Structure
+
+```
+├── main.py           # FastAPI application
+├── requirements.txt  # Python dependencies
+├── render.yaml       # Render deployment config
+├── uploads/          # Video storage
+└── frontend/         # Expo frontend app (optional)
+```

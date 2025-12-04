@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "scheme": "acme",
+    "plugins": [
+      "expo-router",
+      "expo-sqlite",
+      "expo-video"
+    ],
+    "name": "expo-router-mwe",
+    "slug": "expo-router-mwe",
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "8525976e-88d2-424b-886f-b9ca3e5dcf84"
+      }
+    },
+    "owner": "shihyun_lin",
+    "ios": {
+      "bundleIdentifier": "com.spiketren.exporoutermwe",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSCameraUsageDescription": "EmoGo 需要存取相機來錄製您的心情 vlog",
+        "NSMicrophoneUsageDescription": "EmoGo 需要存取麥克風來錄製您的心情 vlog",
+        "NSLocationWhenInUseUsageDescription": "EmoGo 需要您的位置資訊來記錄心情時的地點"
+      }
+    },
+    "android": {
+      "package": "com.spiketren.exporoutermwe",
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
+    }
+  }
+}

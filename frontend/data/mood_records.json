@@ -1,0 +1,77 @@
+{
+    "metadata": {
+        "exportTime": "2025-11-27T13:56:00+08:00",
+        "totalRecords": 5,
+        "firstRecordTime": 1764157060,
+        "lastRecordTime": 1764222875,
+        "timeSpanHours": 18.27,
+        "meetsRequirements": true
+    },
+    "records": [
+        {
+            "id": 8,
+            "timestamp": 1764222875,
+            "datetime": "2025-11-27T13:54:35+08:00",
+            "localTime": "2025/11/27 下午1:54:35",
+            "mood_score": 4,
+            "video_path": "file:///var/mobile/Containers/Data/Application/F5BBD93E-2AA0-480D-BC7C-D7DA65CAE65F/Library/Caches/ExponentExperienceData/@shihyun_lin/expo-router-mwe/Camera/912D5615-E40B-4C46-80C9-638E835EF44C.mov",
+            "location": {
+                "latitude": 25.020217324586618,
+                "longitude": 121.54455072494882,
+                "accuracy": 9.047221149618087
+            }
+        },
+        {
+            "id": 7,
+            "timestamp": 1764222712,
+            "datetime": "2025-11-27T13:51:52+08:00",
+            "localTime": "2025/11/27 下午1:51:52",
+            "mood_score": 2,
+            "video_path": "file:///var/mobile/Containers/Data/Application/F5BBD93E-2AA0-480D-BC7C-D7DA65CAE65F/Library/Caches/ExponentExperienceData/@shihyun_lin/expo-router-mwe/Camera/E30193D3-9887-4D70-90FB-9E577885CC80.mov",
+            "location": {
+                "latitude": 25.020217374865535,
+                "longitude": 121.54455071209823,
+                "accuracy": 7.418346904301863
+            }
+        },
+        {
+            "id": 5,
+            "timestamp": 1764221603,
+            "datetime": "2025-11-27T13:33:23+08:00",
+            "localTime": "2025/11/27 下午1:33:23",
+            "mood_score": 3,
+            "video_path": "file:///var/mobile/Containers/Data/Application/F5BBD93E-2AA0-480D-BC7C-D7DA65CAE65F/Library/Caches/ExponentExperienceData/@shihyun_lin/expo-router-mwe/Camera/5C4B4313-237F-47C0-BFD7-B80B645478B0.mov",
+            "location": {
+                "latitude": 25.020217437430674,
+                "longitude": 121.54455069644524,
+                "accuracy": 9.216563298267307
+            }
+        },
+        {
+            "id": 2,
+            "timestamp": 1764221341,
+            "datetime": "2025-11-27T13:29:01+08:00",
+            "localTime": "2025/11/27 下午1:29:01",
+            "mood_score": 3,
+            "video_path": "file:///var/mobile/Containers/Data/Application/F5BBD93E-2AA0-480D-BC7C-D7DA65CAE65F/Library/Caches/ExponentExperienceData/@shihyun_lin/expo-router-mwe/Camera/C4B9C2A9-08AC-4823-8A1D-11C4A2E5D508.mov",
+            "location": {
+                "latitude": null,
+                "longitude": null,
+                "accuracy": null
+            }
+        },
+        {
+            "id": 17,
+            "timestamp": 1764157060,
+            "datetime": "2025-11-26T19:44:20+08:00",
+            "localTime": "2025/11/26 下午7:44:20",
+            "mood_score": 3,
+            "video_path": "file:///var/mobile/Containers/Data/Application/F5BBD93E-2AA0-480D-BC7C-D7DA65CAE65F/Library/Caches/ExponentExperienceData/@anonymous/expo-router-mwe-ef46d2fc-a56a-46fc-aa34-e5c15fc4bbf3/Camera/20C89012-2D85-4621-89D1-A2AC9501B2B3.mov",
+            "location": {
+                "latitude": 25.02083754230049,
+                "longitude": 121.54256180129067,
+                "accuracy": 10.508066103601271
+            }
+        }
+    ]
+}
